@@ -1,5 +1,10 @@
+using Microsoft.AspNetCore.DataProtection;
+
 var builder = WebApplication.CreateBuilder(args); 
 builder.WebHost.UseUrls("http://+:8080");
+builder.Services.AddDataProtection()
+    .PersistKeysToFileSystem(new DirectoryInfo(@"/app/DataProtection-Keys"))
+    .SetApplicationName("PavanPortfolio");
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
