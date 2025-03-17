@@ -1,5 +1,5 @@
 ﻿services:
-  - name: MyPortfolioApp
+  - name: PavanPortfolio
     type: web
     env: docker
     plan: free

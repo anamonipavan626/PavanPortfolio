@@ -1,5 +1,5 @@
-var builder = WebApplication.CreateBuilder(args);
-
+var builder = WebApplication.CreateBuilder(args); 
+builder.WebHost.UseUrls("http://+:8080");
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
@@ -22,6 +22,5 @@ app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Portfolio}/{action=PortFolio}/{id?}");
-builder.WebHost.UseUrls("http://+:8080");
+    pattern: "{controller=Portfolio}/{action=PortFolio}/{id?}"); 
 app.Run();
