@@ -23,5 +23,5 @@ app.UseAuthorization();
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Portfolio}/{action=PortFolio}/{id?}");
-
+builder.WebHost.UseUrls("http://+:8080");
 app.Run();

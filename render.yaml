@@ -1,17 +1,7 @@
 ﻿services:
-  - name: PavanPortfolio               # Replace with your app name
-    type: web                          # Web service for MVC apps
-    env: dotnet-core                   # Environment for .NET Core apps
-    plan: free                         # Free tier on Render
-    buildCommand: dotnet publish -c Release -o out
-    startCommand: dotnet out/PavanPortfolio.dll
-    envVars:                           # Environment variables (if needed)
-      - key: ASPNETCORE_ENVIRONMENT
-        value: Production
-      - key: CONNECTION_STRINGS__DefaultConnection
-        sync: false                    # Prevents Render from auto-syncing this value
-
-    healthCheckPath: /health           # (Optional) Custom health check endpoint
-    autoDeploy: true                   # Auto-deploy on every commit
-    region: oregon                     # Choose your preferred region (e.g., Oregon or Frankfurt)
-
+  - name: MyPortfolioApp
+    type: web
+    env: docker
+    plan: free
+    dockerfilePath: ./Dockerfile
+    autoDeploy: true
