@@ -10,34 +10,50 @@ namespace PavanPortfolio.Controllers
         private readonly string FolderPath =
             System.IO.Path.GetFullPath(System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"..\..\..\")) + "Models\\";
 
-        public IActionResult Registration()
+        //public IActionResult Registration()
+        [HttpPost]
+        public IActionResult Registration([FromBody] RegistrationRequest request)
         {
-            ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
-            string excelFilePath = Path.Combine(FolderPath, "SystemRegistrations.xlsx");
-            var systemId = GetSystemId();
-            var existingRecords = LoadExcelData(excelFilePath);
-
-            if (existingRecords.Any(x => x.SystemId == systemId))
+            try
             {
-                return BadRequest("This system is already registered.and request also submited. Please use another system.");
+                ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
+                string excelFilePath = Path.Combine(FolderPath, "SystemRegistrations.xlsx");
+
+                if (!System.IO.File.Exists(excelFilePath))
+                    excelFilePath = Path.Combine(System.IO.Path.GetFullPath(System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory)) + "Models\\", "SystemRegistrations.xlsx");
+
+
+                var systemId = GetSystemId();
+                var existingRecords = LoadExcelData(excelFilePath);
+
+                if (existingRecords.Any(x => x.SystemId == systemId))
+                {
+                    return BadRequest("This system is already registered.and request also submited. Please use another system.");
+                }
+
+                var systemDetails = new SystemRegistration
+                {
+                    SystemId = systemId,
+                    ConfigurationDetails = GetSystemConfiguration(),
+                    RegisteredAt = DateTime.Now
+                };
+
+                SaveToExcel(systemDetails, excelFilePath);
+                SendRequestTomail(request.Name, request.Email, request.Body);
+                return Ok("Request sent to user and  your System successfully registered.");
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine(ex.Message+"  Exception Details Are "+ ex);
+                return Ok(ex.Message+"  Exception Details Are "+ ex);
             }
 
-            var systemDetails = new SystemRegistration
-            {
-                SystemId = systemId,
-                ConfigurationDetails = GetSystemConfiguration(),
-                RegisteredAt = DateTime.Now
-            };
-
-            SaveToExcel(systemDetails, excelFilePath);
-            SendRequestTomail("Pavan", "anamonipavan@intellectinfo.com", "I want to talk to you");
-            return Ok("System successfully registered.");
         }
 
         private string GetSystemId()
         {
             string systemId = System.Environment.MachineName + "_" + System.Environment.OSVersion.VersionString;
-            return systemId.GetHashCode().ToString(); // Generate a unique identifier
+            return systemId; // Generate a unique identifier
         }
 
         private string GetSystemConfiguration()
@@ -146,5 +162,12 @@ namespace PavanPortfolio.Controllers
         public string SystemId { get; set; }
         public string ConfigurationDetails { get; set; }
         public DateTime RegisteredAt { get; set; }
+    }
+    public class RegistrationRequest
+    {
+        public string? Name { get; set; }
+        public string? Email { get; set; }
+        public string? Body { get; set; }
+        public SystemRegistration? SystemRegistration { get; set; }
     }
 }

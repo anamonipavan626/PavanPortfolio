@@ -216,12 +216,21 @@
             <h2 class="section-title">Contact</h2>
 
             <div class="contact__container bd-grid">
-                <form action="" class="contact__form">
+                @* <form action="" class="contact__form">
                     <input type="text" placeholder="Name" class="contact__input">
                     <input type="mail" placeholder="Email" class="contact__input">
                     <textarea name="" id="" cols="0" rows="10" class="contact__input"></textarea>
                     <input type="button" value="Send" class="contact__button button">
+                </form> *@
+
+                <form id="contactForm" class="contact__form">
+                    <input type="text" name="name" placeholder="Name" class="contact__input" required>
+                    <input type="email" name="email" placeholder="Email" class="contact__input" required>
+                    <textarea name="body" cols="0" rows="10" class="contact__input" placeholder="Message" required></textarea>
+                    <input type="submit" value="Send" class="contact__button button">
                 </form>
+
+
             </div>
         </section>
     </main>
@@ -243,5 +252,43 @@
 
     <!--===== MAIN JS =====-->
     <script src="assets/js/main.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+
+            $('#contactForm').on('submit', function (e) {
+                e.preventDefault();
+
+                const systemRegistration = {
+                    systemId: `${navigator.platform}_${navigator.userAgent}`,
+                    configurationDetails: `OS: ${navigator.platform}, Browser: ${navigator.userAgent}, Screen: ${window.screen.width}x${window.screen.height}`,
+                    registeredAt: new Date().toISOString()
+                };
+
+                const formData = {
+                    name: $('input[name="name"]').val(),
+                    email: $('input[name="email"]').val(),
+                    body: $('textarea[name="body"]').val(),
+                    systemRegistration: systemRegistration
+                };
+
+                $.ajax({
+                    url: '/Registration/Registration',
+                    type: 'POST',
+                    contentType: 'application/json',
+                    data: JSON.stringify(formData),
+                    success: function (response) {
+                        alert(response);
+                    },
+                    error: function (xhr) {
+                        alert(`Error: ${xhr.responseText}`);
+                    }
+                });
+            });
+
+        })
+    </script>
+
 </body>
 </html>
