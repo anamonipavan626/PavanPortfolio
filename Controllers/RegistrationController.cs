@@ -21,9 +21,10 @@ namespace PavanPortfolio.Controllers
 
                 if (!System.IO.File.Exists(excelFilePath))
                     excelFilePath = Path.Combine(System.IO.Path.GetFullPath(System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory)) + "Models\\", "SystemRegistrations.xlsx");
+                if (!System.IO.File.Exists(excelFilePath))
+                    System.IO.File.Create(excelFilePath);
 
-
-                var systemId = GetSystemId();
+               var systemId = GetSystemId();
                 var existingRecords = LoadExcelData(excelFilePath);
 
                 if (existingRecords.Any(x => x.SystemId == systemId))
