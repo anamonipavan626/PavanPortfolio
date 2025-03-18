@@ -8,7 +8,7 @@ namespace PavanPortfolio.Controllers
     public class RegistrationController : Controller
     {
         private readonly string FolderPath =
-            System.IO.Path.GetFullPath(System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"..\..\..\")) + "Models\\";
+            System.IO.Path.GetFullPath(System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"..\..\..\")) + "Models";
 
         //public IActionResult Registration()
         [HttpPost]
@@ -20,7 +20,7 @@ namespace PavanPortfolio.Controllers
                 string excelFilePath = Path.Combine(FolderPath, "SystemRegistrations.xlsx");
 
                 if (!System.IO.File.Exists(excelFilePath))
-                    excelFilePath = Path.Combine(System.IO.Path.GetFullPath(System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory)) + "Models\\", "SystemRegistrations.xlsx");
+                    excelFilePath = Path.Combine(System.IO.Path.GetFullPath(System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory)) + "Models", "SystemRegistrations.xlsx");
                 if (!System.IO.File.Exists(excelFilePath))
                     System.IO.File.Create(excelFilePath);
 
@@ -154,6 +154,11 @@ namespace PavanPortfolio.Controllers
 
             }
 
+        }
+
+        public IActionResult Error()
+        {
+            return View();  
         }
 
     }

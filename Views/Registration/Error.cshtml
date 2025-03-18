@@ -1,0 +1,82 @@
+﻿
+ 
+@{
+    Layout = null; 
+     
+}
+@using (Html.BeginForm("login", "Home", FormMethod.Post))
+{
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Error</title>
+        <style>
+            body {
+                margin: 0;
+                padding: 0;
+                font-family: 'Arial', sans-serif;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                height: 100vh;
+                /* background: linear-gradient(to right, #4facfe, #00f2fe); */
+                color: #fff;
+            }
+
+            ._container {
+                text-align: center;
+            }
+
+           /*  h1 {
+                font-size: 8rem;
+                margin: 0;
+                font-weight: bold;
+                color: #ff6b6b;
+                text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+            } */
+
+            p {
+                font-size: 1.5rem;
+                margin: 20px 0;
+                color: black;
+            }
+
+            .home-btn {
+                display: inline-block;
+                padding: 10px 25px;
+                margin-top: 20px;
+                font-size: 1.2rem;
+                color: #4facfe;
+                background-color: #fff;
+                border: none;
+                border-radius: 25px;
+                text-decoration: none;
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+                transition: transform 0.3s ease, box-shadow 0.3s ease;
+            }
+
+                .home-btn:hover {
+                    transform: scale(1.1);
+                    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
+                }
+        </style>
+    </head>
+    <body>
+        <div class="_container">
+            <h1 style="text-align: center;top: 20rem;position: relative;font-size: 40px;color: #3fc0fd;">
+
+                <br />
+
+                Oops! Could Not Process Your Request
+            </h1>
+        </div>
+    </body>
+    </html>
+
+
+}
+@section PageScripts {
+
+}
