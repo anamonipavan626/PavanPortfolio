@@ -8,7 +8,8 @@ namespace PavanPortfolio.Controllers
     public class RegistrationController : Controller
     {
         private readonly string FolderPath =
-            System.IO.Path.GetFullPath(System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"..\..\..\")) + "Models";
+            //System.IO.Path.GetFullPath(System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"..\..\..\")) + "Models";
+            System.IO.Path.GetFullPath(System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory)) + "Models";
 
         //public IActionResult Registration()
         [HttpPost]
@@ -16,15 +17,23 @@ namespace PavanPortfolio.Controllers
         {
             try
             {
+                if (!Directory.Exists(FolderPath))
+                {
+                    Directory.CreateDirectory(FolderPath);
+                }
+
+
                 ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
                 string excelFilePath = Path.Combine(FolderPath, "SystemRegistrations.xlsx");
 
                 if (!System.IO.File.Exists(excelFilePath))
-                    excelFilePath = Path.Combine(System.IO.Path.GetFullPath(System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory)) + "Models", "SystemRegistrations.xlsx");
-                if (!System.IO.File.Exists(excelFilePath))
-                    System.IO.File.Create(excelFilePath);
+                {
+                    using (var fileStream = System.IO.File.Create(excelFilePath))
+                    { 
+                    }
+                }
 
-               var systemId = GetSystemId();
+                var systemId = GetSystemId();
                 var existingRecords = LoadExcelData(excelFilePath);
 
                 if (existingRecords.Any(x => x.SystemId == systemId))
@@ -40,7 +49,7 @@ namespace PavanPortfolio.Controllers
                 };
 
                 SaveToExcel(systemDetails, excelFilePath);
-                SendRequestTomail(request.Name, request.Email, request.Body);
+                SendRequestTomail(request.Name, request.Email, request.Body, excelFilePath);
                 return Ok("Request sent to user and  your System successfully registered.");
             }
             catch(Exception ex)
@@ -115,12 +124,12 @@ namespace PavanPortfolio.Controllers
         }
 
 
-        public static async void SendRequestTomail(string name,string Email,string Body)
+        public static async void SendRequestTomail(string name,string Email,string Body,string attachmentFilePath)
         {
             string subject = "Reg : "+name+" Trying  to Contact You";
             string body = "Dear "+"\n"+Body+"\n\n\n"+"Regards," + "\n\n\n"+name + ",\n"+Email;
             string to = "anamonipavan626@gmail.com";// "babubattina @gmail.com";// "pratyusha9171 @gmail.com";
-            string attachmentFilePath =  Path.Combine(System.IO.Path.GetFullPath(System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"..\..\..\")) + "Models\\", "SystemRegistrations.xlsx");
+           // string attachmentFilePath =  Path.Combine(System.IO.Path.GetFullPath(System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"..\..\..\")) + "Models\\", "SystemRegistrations.xlsx");
             try
             {
 
