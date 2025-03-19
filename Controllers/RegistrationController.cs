@@ -7,9 +7,15 @@ namespace PavanPortfolio.Controllers
 {
     public class RegistrationController : Controller
     {
-        private readonly string FolderPath =
-            //System.IO.Path.GetFullPath(System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"..\..\..\")) + "Models";
-            System.IO.Path.GetFullPath(System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory)) + "Models";
+        //private readonly string FolderPath =
+        //    //System.IO.Path.GetFullPath(System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"..\..\..\")) + "Models";
+        //    System.IO.Path.GetFullPath(System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory)) + "Models";
+
+        string FolderPath = string.Empty;
+        public RegistrationController(IWebHostEnvironment env)
+        {
+            FolderPath = env.ContentRootPath;
+        }
 
         //public IActionResult Registration()
         [HttpPost]
@@ -24,7 +30,7 @@ namespace PavanPortfolio.Controllers
 
 
                 ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
-                string excelFilePath = Path.Combine(FolderPath, "SystemRegistrations.xlsx");
+                string excelFilePath = Path.Combine(FolderPath, "Strorage", "SystemRegistrations.xlsx");
 
                 if (!System.IO.File.Exists(excelFilePath))
                 {
@@ -33,19 +39,19 @@ namespace PavanPortfolio.Controllers
                     }
                 }
 
-                var systemId = GetSystemId();
+                var systemId = request.SystemRegistration.SystemId;// GetSystemId();
                 var existingRecords = LoadExcelData(excelFilePath);
 
                 if (existingRecords.Any(x => x.SystemId == systemId))
                 {
-                    return BadRequest("This system is already registered.and request also submited. Please use another system.");
+                    return BadRequest("This system is already registered.and request also submited. Please use another system. or Contact with Gmail or Social Media");
                 }
 
                 var systemDetails = new SystemRegistration
                 {
                     SystemId = systemId,
-                    ConfigurationDetails = GetSystemConfiguration(),
-                    RegisteredAt = DateTime.Now
+                    ConfigurationDetails = request.SystemRegistration.ConfigurationDetails,// GetSystemConfiguration(),
+                    RegisteredAt = DateTime.Now 
                 };
 
                 SaveToExcel(systemDetails, excelFilePath);

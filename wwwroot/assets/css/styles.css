@@ -486,18 +486,30 @@ img {
    
 
     .skills__git {
-        width: 90%;
-        background-color: #f34f29;  Git orange 
+        width: 75%;
     }
 
     .skills__mysql {
-        width: 80%;
-        background-color: #00758f;  MySQL blue 
+        width: 75%;
     }
 
     .skills__webapi {
         width: 85%;
-        background-color: #4caf50;  Web API green 
+    }
+
+
+    .skills__NET {
+        width: 85%;
+    }
+
+    .skills__Core {
+        width: 80%;
+    }
+    .skills__TortoiseSVN {
+        width: 60%;
+    }
+    .skills__SQL {
+        width: 85%;
     }
 
 

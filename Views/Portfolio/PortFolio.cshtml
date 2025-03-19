@@ -100,6 +100,63 @@
                 <div>
                     <h2 class="skills__subtitle">Profesional Skills</h2>
                     <p class="skills__text">I have 2+ years of experience as a .NET Developer, proficient in HTML5, CSS3, JavaScript, and jQuery for front-end development. I have expertise in Git, MySQL, NHibernate, and developing secure Web APIs. Additionally, I have some basic knowledge of Docker and deployment using Nginx.</p>
+                    <!--===== C#.NET =====-->
+                    <div class="skills__data">
+                        <div class="skills__names">
+                            <i class='bx bxl-microsoft skills__icon'></i>
+                            <span class="skills__name">C#.NET</span>
+                        </div>
+                        <div class="skills__bar skills__NET"></div>
+                        <div>
+                            <span class="skills__percentage">85%</span>
+                        </div>
+                    </div>
+
+                    <div class="skills__data">
+                        <div class="skills__names">
+                            <i class='bx bxl-git skills__icon'></i>
+                            <span class="skills__name">Git</span>
+                        </div>
+                        <div class="skills__bar skills__git"></div>
+                        <div>
+                            <span class="skills__percentage">75%</span>
+                        </div>
+                    </div>
+                    <!--===== MVC .NET Core =====-->
+                    <div class="skills__data">
+                        <div class="skills__names">
+                            <i class='bx bx-desktop skills__icon'></i>
+                            <span class="skills__name"> MVC .NET Core</span>
+                        </div>
+                        <div class="skills__bar skills__Core"></div>
+                        <div>
+                            <span class="skills__percentage">80%</span>
+                        </div>
+                    </div>
+                    <div class="skills__data">
+                        <div class="skills__names">
+                            <i class='bx bxs-data skills__icon'></i>
+                            <span class="skills__name">MySQL</span>
+                        </div>
+                        <div class="skills__bar skills__mysql"></div>
+                        <div>
+                            <span class="skills__percentage">75%</span>
+                        </div>
+                    </div>
+
+                    <div class="skills__data">
+                        <div class="skills__names">
+                            <i class='bx bx-world skills__icon'></i>
+                            <span class="skills__name">Web API</span>
+                        </div>
+                        <div class="skills__bar skills__webapi"></div>
+                        <div>
+                            <span class="skills__percentage">85%</span>
+                        </div>
+                    </div>
+
+                    
+                    
                     <div class="skills__data">
                         <div class="skills__names">
                             <i class='bx bxl-html5 skills__icon'></i>
@@ -125,61 +182,42 @@
                     <div class="skills__data">
                         <div class="skills__names">
                             <i class='bx bxl-javascript skills__icon'></i>
-                            <span class="skills__name">JAVASCRIPT</span>
+                            <span class="skills__name">JAVASCRIPT and Ajax</span>
                         </div>
                         <div class="skills__bar skills__js">
                         </div>
                         <div>
                             <span class="skills__percentage">65%</span>
                         </div>
-                    </div>
+                    </div>  
+                    <!--===== TortoiseSVN =====-->
                     <div class="skills__data">
                         <div class="skills__names">
-                            <i class='bx bxs-paint skills__icon'></i>
-                            <span class="skills__name">UX/UI</span>
+                            <i class='bx bx-git-branch skills__icon'></i>
+                            <span class="skills__name"> TortoiseSVN</span>
                         </div>
-                        <div class="skills__bar skills__ux">
-                        </div>
+                        <div class="skills__bar skills__TortoiseSVN"></div>
                         <div>
-                            <span class="skills__percentage">85%</span>
+                            <span class="skills__percentage">60%</span>
                         </div>
                     </div>
-                    <div class="skills__data">
-                        <div class="skills__names">
-                            <i class='bx bxl-git skills__icon'></i>
-                            <span class="skills__name">Git</span>
-                        </div>
-                        <div class="skills__bar skills__git"></div>
-                        <div>
-                            <span class="skills__percentage">75%</span>
-                        </div>
-                    </div>
-
+                    <!--===== SQL Server =====-->
                     <div class="skills__data">
                         <div class="skills__names">
                             <i class='bx bxs-data skills__icon'></i>
-                            <span class="skills__name">MySQL</span>
+                            <span class="skills__name"> SQL Server</span>
                         </div>
-                        <div class="skills__bar skills__mysql"></div>
-                        <div>
-                            <span class="skills__percentage">75%</span>
-                        </div>
-                    </div>
-
-                    <div class="skills__data">
-                        <div class="skills__names">
-                            <i class='bx bx-world skills__icon'></i>
-                            <span class="skills__name">Web API</span>
-                        </div>
-                        <div class="skills__bar skills__webapi"></div>
+                        <div class="skills__bar skills__SQL"></div>
                         <div>
                             <span class="skills__percentage">85%</span>
                         </div>
                     </div>
-
+                      
                 </div>
 
                 <div>
+                    <img src="assets/img/PavanTechnologiesKnows.png" alt="" class="skills__img">
+                    <br /><br />
                     <img src="assets/img/work3.jpg" alt="" class="skills__img">
                 </div>
             </div>
@@ -227,7 +265,7 @@
                     <input type="text" name="name" placeholder="Name" class="contact__input" required>
                     <input type="email" name="email" placeholder="Email" class="contact__input" required>
                     <textarea name="body" cols="0" rows="10" class="contact__input" placeholder="Message" required></textarea>
-                    <input type="submit" value="Send" class="contact__button button">
+                    <input type="submit" value="Send"  id="Save" class="contact__button button">
                 </form>
 
 
@@ -259,6 +297,13 @@
 
             $('#contactForm').on('submit', function (e) {
                 e.preventDefault();
+
+                document.getElementById("Save").disabled = true;
+
+                // Enable the button after 5 seconds (optional example)
+                setTimeout(function () {
+                    document.getElementById("Save").disabled = false;
+                }, 5000);
 
                 const systemRegistration = {
                     systemId: `${navigator.platform}_${navigator.userAgent}`,
