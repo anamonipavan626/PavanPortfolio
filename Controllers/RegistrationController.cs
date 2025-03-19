@@ -9,12 +9,12 @@ namespace PavanPortfolio.Controllers
     {
         //private readonly string FolderPath =
         //    //System.IO.Path.GetFullPath(System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"..\..\..\")) + "Models";
-        //    System.IO.Path.GetFullPath(System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory)) + "Models";
+            //System.IO.Path.GetFullPath(System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory)) + "Models";
 
         string FolderPath = string.Empty;
         public RegistrationController(IWebHostEnvironment env)
         {
-            FolderPath = env.ContentRootPath;
+            FolderPath = env.WebRootPath; 
         }
 
         //public IActionResult Registration()
