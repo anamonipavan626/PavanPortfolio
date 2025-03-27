@@ -1,4 +1,8 @@
 using Microsoft.AspNetCore.DataProtection;
+using PavanPortfolio;
+using Quartz.Impl;
+using Quartz.Spi;
+using Quartz;
 
 var builder = WebApplication.CreateBuilder(args); 
 builder.WebHost.UseUrls("http://+:8080");
@@ -8,18 +12,43 @@ builder.Services.AddDataProtection()
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
-var app = builder.Build();
+// Add services to the container.
+builder.Services.AddControllersWithViews();
 
-// Configure the HTTP request pipeline.
-//if (!app.Environment.IsDevelopment())
-//{
-//    app.UseExceptionHandler("/Registration/Error");
-//    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-//    app.UseHsts();
-//}
+var CronSchedule = new ConfigurationBuilder().AddJsonFile("appsettings.json", true, false).Build().GetSection("APIKeys:CronSchedule").Value;
+
+builder.Services.AddControllers();
+builder.Services.AddHttpClient();
+builder.Services.AddSingleton<IJobFactory, JobFactory>();
+builder.Services.AddSingleton<ISchedulerFactory, StdSchedulerFactory>();
+builder.Services.AddHostedService<QuartzHostedService>();
+builder.Services.AddSingleton<FDSchedular>();
+builder.Services.AddControllers();
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSingleton(new JobSchedule(
+    jobType: typeof(FDSchedular),
+    cronExpression: "0 0/14 * * * ?"));
+
+var specificOrgins = "AllowAll";
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(name: specificOrgins,
+                      policy =>
+                      {
+                          policy.AllowAnyOrigin();
+                          policy.AllowAnyHeader();
+                          policy.AllowAnyMethod();
+                      });
+});
+
+builder.WebHost.ConfigureKestrel(c =>
+{
+    c.Limits.KeepAliveTimeout = TimeSpan.FromMinutes(10);
+});
+var app = builder.Build();
+ 
 
 app.UseExceptionHandler("/Registration/Error");
-// The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
 app.UseHsts();
 
 app.UseHttpsRedirection();
