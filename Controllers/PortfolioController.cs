@@ -8,5 +8,15 @@ namespace PavanPortfolio.Controllers
         {
             return View();
         }
+        public IActionResult Menu()
+        {
+
+            return View();
+        }
+        public IActionResult Menu2()
+        {
+
+            return View();
+        }
     }
 }

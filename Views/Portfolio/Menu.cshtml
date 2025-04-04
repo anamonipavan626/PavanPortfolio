@@ -1,0 +1,247 @@
+﻿@{
+    ViewBag.Title = "NandiniMakeOver";
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Beauty Salon Price List</title>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(to bottom right, #ffe4ec, #fff0c9);
+            padding: 20px;
+        }
+
+        .container {
+            width: 400px;
+            background: white;
+            padding: 20px;
+            margin: auto;
+            border-radius: 15px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            position: relative;
+            border: 5px solid #ff69b4;
+        }
+
+        h1 {
+            font-size: 24px;
+            color: #ff4081;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+        }
+
+        /* Corner designs using CSS shapes */
+        .corner-deco {
+            position: absolute;
+            width: 50px;
+            height: 50px;
+            background: radial-gradient(circle, #ff69b4 30%, transparent 70%);
+            z-index: 1;
+        }
+
+        .top-left {
+            top: -25px;
+            left: -25px;
+            border-top-left-radius: 100%;
+        }
+
+        .top-right {
+            top: -25px;
+            right: -25px;
+            border-top-right-radius: 100%;
+        }
+
+        .bottom-left {
+            bottom: -25px;
+            left: -25px;
+            border-bottom-left-radius: 100%;
+        }
+
+        .bottom-right {
+            bottom: -25px;
+            right: -25px;
+            border-bottom-right-radius: 100%;
+        }
+
+        .price-list {
+            text-align: left;
+            z-index: 2;
+            position: relative;
+        }
+
+        .item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+            border-bottom: 2px solid #ff69b4;
+        }
+
+            .item input {
+                border: none;
+                font-size: 16px;
+                font-weight: bold;
+                padding: 5px;
+                font-family: 'Poppins', sans-serif;
+            }
+
+        .service-name {
+            width: 55%;
+        }
+
+        .price-container {
+            display: flex;
+            align-items: center;
+            background: #ffeaa7;
+            padding: 5px;
+            border-radius: 5px;
+        }
+
+        .rupee-symbol {
+            font-weight: bold;
+            font-size: 16px;
+            margin-right: 5px;
+        }
+
+        .price-input {
+            width: 50px;
+            background: transparent;
+            text-align: right;
+            border: none;
+        }
+
+        .add-btn, .delete-btn {
+            background: #d63031;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+            font-size: 14px;
+            margin-left: 5px;
+            border-radius: 5px;
+        }
+
+        .add-btn {
+            background: #00b894;
+            font-size: 18px;
+            margin-top: 10px;
+        }
+
+        .download-btn, .visit-card-btn {
+            margin: 15px auto;
+            padding: 10px 20px;
+            background: #6c5ce7;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            border: none;
+            border-radius: 10px;
+            display: block;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Visiting Card Button -->
+    <button class="visit-card-btn" onclick="downloadVisitingCard()">Download Visiting Card</button>
+
+    <!-- Price List Container -->
+    <div class="container" id="priceList">
+        <!-- CSS Corner decorations -->
+        <div class="corner-deco top-left"></div>
+        <div class="corner-deco top-right"></div>
+        <div class="corner-deco bottom-left"></div>
+        <div class="corner-deco bottom-right"></div>
+
+        <h1 style="text-align: center;" contenteditable="true"> <b>Nandhini Makeover</b> <br /> Beauty Salon Price List</h1>
+        <div class="price-list" id="serviceContainer">
+            <!-- Item1 -->
+            <div class="item">
+                <input type="text" class="service-name" value="Hair Coloring">
+                <div class="price-container">
+                    <span class="rupee-symbol">₹</span>
+                    <input type="text" class="price-input" value="2305.00">
+                </div>
+                <button class="delete-btn" onclick="deleteService(this)">🗑</button>
+            </div>
+
+            <!-- Item2 -->
+            <div class="item">
+                <input type="text" class="service-name" value="Haircut Styling">
+                <div class="price-container">
+                    <span class="rupee-symbol">₹</span>
+                    <input type="text" class="price-input" value="5.00">
+                </div>
+                <button class="delete-btn" onclick="deleteService(this)">🗑</button>
+            </div>
+
+
+        </div>
+        <button class="add-btn" id="addButton" onclick="addService()">+</button>
+        <button class="download-btn" id="downloadBtn" onclick="downloadImage()">Download Price List</button>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script>
+        function addService() {
+            const container = document.getElementById('serviceContainer');
+            const newItem = document.createElement('div');
+            newItem.classList.add('item');
+            newItem.innerHTML = `
+                        <input type="text" class="service-name" placeholder="New Service">
+                        <div class="price-container">
+                          <span class="rupee-symbol">₹</span>
+                          <input type="text" class="price-input" value="0.00">
+                        </div>
+                        <button class="delete-btn" onclick="deleteService(this)">🗑</button>
+                      `;
+            container.appendChild(newItem);
+        }
+
+        function deleteService(button) {
+            button.parentElement.remove();
+        }
+
+        function downloadImage() {
+            const addButton = document.getElementById('addButton');
+            const deleteButtons = document.querySelectorAll('.delete-btn');
+            const downloadBtn = document.getElementById('downloadBtn');
+
+            // Hide all buttons for clean image
+            addButton.style.display = 'none';
+            downloadBtn.style.display = 'none';
+            deleteButtons.forEach(btn => btn.style.display = 'none');
+
+            const node = document.getElementById('priceList');
+            html2canvas(node).then(canvas => {
+                const link = document.createElement('a');
+                link.download = 'beauty_salon_price_list.png';
+                link.href = canvas.toDataURL();
+                link.click();
+
+                // Restore buttons
+                addButton.style.display = 'inline-block';
+                downloadBtn.style.display = 'block';
+                deleteButtons.forEach(btn => btn.style.display = 'inline-block');
+            });
+        }
+
+        function downloadVisitingCard() {
+
+            const visitingCardUrl = 'assets/NandhiniMakeoverVisitingCard/NandhiniMakeoverVisitingCard.jpg';
+            const link = document.createElement('a');
+            link.href = visitingCardUrl;
+            link.download = 'NandhiniMakeoverVisitingCard.jpg';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+    </script>
+</body>
+</html>
+
+
+
