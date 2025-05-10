@@ -1,0 +1,384 @@
+﻿@{
+    ViewBag.Title = "Happy Birthday Sushmitha❤️";
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Happy Birthday Sushmi❤️ ❤️</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', sans-serif;
+            background: linear-gradient(to right, #ffdee9, #b5fffc);
+            overflow: hidden;
+        }
+
+        /* Marquee Style */
+        marquee {
+            width: 100%;
+            padding: 10px 0;
+            background-color: #ff69b4;
+            color: white;
+            font-size: 1.5rem;
+            font-weight: bold;
+            text-align: center;
+            scrollamount: 10; /* Faster speed */
+        }
+
+        /* Container to hold Image and Quotes */
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            position: relative;
+        }
+
+        .photo, .quotes {
+            flex: 1 1 300px;
+            margin: 10px;
+            position: relative;
+        }
+
+        /* Cake styling with an image */
+        .cake {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 120px;
+            height: 120px;
+            background-image: url('/assets/img/cake.jpeg');
+            background-size: cover;
+            background-position: center;
+            text-align: center;
+            font-size: 1.1rem;
+            font-weight: bold;
+            color: #fff;
+            line-height: 120px;
+            padding: 10px;
+            z-index: 2;
+            border-radius: 10px;
+        }
+
+            .cake span {
+                position: absolute;
+                top: 40%;
+                left: 50%;
+                transform: translateX(-50%);
+                font-size: 1.1rem;
+                font-weight: bold;
+                text-shadow: 0 0 10px rgba(0,0,0,0.7);
+            }
+
+        /* Image Styling */
+        .photo {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            max-height: 400px;
+            padding: 10px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.1);
+            background-color: white;
+            border-radius: 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+            .photo img {
+                max-width: 90%;
+                max-height: 350px;
+                border-radius: 10px;
+                box-shadow: 0 0 20px rgba(0,0,0,0.1);
+                filter: brightness(0.9);
+                opacity: 0.95;
+                transition: 0.3s ease;
+            }
+
+        /* Quotes Section */
+        .quotes {
+            color: #333;
+            font-size: 1.3rem;
+            line-height: 2rem;
+            max-width: 600px;
+            position: relative;
+        }
+
+            .quotes::before {
+                content: "";
+                font-size: 2.5rem;
+                position: absolute;
+                left: -3rem;
+                top: -0.5rem;
+            }
+
+        marquee {
+            width: 100%;
+            background-color: #ff69b4;
+            color: white;
+            font-size: 1.8rem;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .footer {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            text-align: center;
+            font-weight: bold;
+            padding: 10px;
+            background: #000;
+            color: white;
+            font-size: 1rem;
+            border-top: 4px solid pink;
+            z-index: 10;
+        }
+
+        /* Bubble effect */
+        .bubble {
+            position: absolute;
+            bottom: -50px;
+            width: 20px;
+            height: 20px;
+            background: rgba(255, 182, 193, 0.6);
+            border-radius: 50%;
+            animation: float 10s linear infinite;
+        }
+
+        @@keyframes float {
+            0% {
+                transform: translateY(0) scale(1);
+                opacity: 1;
+            }
+
+            100% {
+                transform: translateY(-100vh) scale(0.5);
+                opacity: 0;
+            }
+        }
+
+        /* Confetti animation */
+        .confetti {
+            position: fixed;
+            width: 10px;
+            height: 10px;
+            background-color: #ff69b4;
+            top: -10px;
+            animation: fall 5s infinite ease-in;
+            z-index: 5;
+        }
+
+        @@keyframes fall {
+            0% {
+                transform: translateY(0) rotate(0);
+                opacity: 1;
+            }
+
+            100% {
+                transform: translateY(100vh) rotate(720deg);
+                opacity: 0;
+            }
+        }
+
+        @@media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+                padding: 10px;
+            }
+
+            .photo {
+                height: 300px;
+                width: 100%;
+            }
+
+            .quotes {
+                font-size: 1.1rem;
+                line-height: 1.8rem;
+            }
+        }
+    </style>
+    <style>
+        .audio-player {
+            position: inherit;
+            bottom: -64px;
+            left: -100px;
+            bottom: -80px;
+            z-index: 9999;
+            width: 250px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.3);
+            opacity: 0.9;
+        }
+
+        /* Background video full screen */
+        #bgVideo {
+            position: fixed;
+            top: 0;
+            left: 0;
+            min-width: 100vw;
+            min-height: 100vh;
+            object-fit: cover;
+            z-index: -2;
+        }
+
+        /* Overlay to dim video slightly for readability */
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(255, 255, 255, 0.4); /* soft white tint */
+            z-index: -1;
+            pointer-events: none;
+        }
+
+    </style>
+
+</head>
+<body>
+    <!-- Background Video -->
+    <video autoplay muted loop playsinline id="bgVideo">
+        <source src="https://cdn.pixabay.com/vimeo/386399210/bokeh-31807.mp4?width=1280&hash=b723de8f7a13d1c94c47d735ae3c1689d4b68651" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+
+    <!-- Overlay to enhance contrast -->
+    <div class="overlay"></div>
+
+    <marquee behavior="scroll" direction="left" scrollamount="15" loop="infinite">
+        🎉 Many more happy returns of the day Sushmitha ❤️ 🎉
+    </marquee>
+
+    <div class="container">
+        <div class="container">
+            <!-- Left Cake -->
+            <div class="cake" style="left: -140px;">
+                <img src="@Url.Content("~/assets/img/cake.png")" alt="Cake" style="height: 120px; width: 120px; border-radius: 10px;" />
+                <span> HBD Sushmitha</span>
+            </div>
+
+            <!-- Center Photo -->
+            @* <div class="photo">
+            <img src="@Url.Content("~/assets/img/SushmiBirthday.jpg")" alt="Mammy" />
+            </div> *@
+            <div class="photo" id="photoContainer">
+                <img id="birthdayImage"
+                     src="@Url.Content("~/assets/img/SushmiBirthday1.jpg")"
+                     alt="Mammy"
+                     onerror="handleImageError()"
+                     style="max-width: 90%; max-height: 350px; border-radius: 10px;" />
+
+                <input type="file"
+                       id="imageUploader"
+                       accept="image/*"
+                       style="display: none; margin-top: 10px;"
+                       onchange="previewImage(event)" />
+            </div>
+
+
+
+
+            <!-- Right Cake -->
+            <div class="cake" style="right: -140px;">
+                <img src="@Url.Content("~/assets/img/cake.png")" alt="Cake" style="height: 120px; width: 120px; border-radius: 10px;" />
+                <span>HBD Sushmitha</span>
+
+                <audio autoplay id="bgAudio" loop controls="controls" class="audio-player">
+
+                    <source src="~/assets/song/teri_nazro_meri_fav.mp3" type="audio/mpeg" />
+
+                    Your browser does not support the audio element.
+                </audio>
+
+
+            </div>
+
+            <div class="quotes">
+                <p style="font-size: 1rem; font-weight: bold; color: crimson;">🎂 HAPPY BIRTHDAY MY DEAR FRIEND ❤️</p>
+                <p>Happy Birthday to the one who makes my heart smile every day. 💖</p>
+                <p>Your presence is not near, but your laughter is my melody, and your friendship is a treasure. 🥰</p>
+                <p>On this special day, I just want you to know how much you matter. 🌹</p>
+                <p>With every heartbeat, with every breath — I smile because of you.</p>
+                <p style="font-style: italic; color: darkgreen;">Always be happy, keep smiling! 😊</p>
+            </div>
+
+        </div>
+
+        <div class="footer">Designed and Wishes by your friend PAVAN</div>
+
+        @* <audio autoplay id="bgAudio" loop controls="controls" class="audio-player">
+
+        <source src="~/assets/song/teri_nazro_meri_fav.mp3" type="audio/mpeg" />
+
+        Your browser does not support the audio element.
+        </audio> *@
+        @*  <script>
+        window.addEventListener("DOMContentLoaded", function () {
+        var audio = document.getElementById("bgAudio");
+        audio.play().catch(function (err) {
+        console.log("Autoplay prevented:", err);
+        });
+        });
+        </script> *@
+
+        <script>
+            document.addEventListener('click', function () {
+                const audio = document.getElementById('bgAudio');
+                audio.muted = false;
+                audio.play();
+            });
+        </script>
+        <script>
+            // Generate bubbles
+            for (let i = 0; i < 30; i++) {
+                const bubble = document.createElement("div");
+                bubble.className = "bubble";
+                bubble.style.left = Math.random() * 100 + "vw";
+                bubble.style.animationDuration = 5 + Math.random() * 5 + "s";
+                document.body.appendChild(bubble);
+            }
+
+            // Generate confetti
+            for (let i = 0; i < 100; i++) {
+                const confetti = document.createElement("div");
+                confetti.className = "confetti";
+                confetti.style.left = Math.random() * 100 + "vw";
+                confetti.style.backgroundColor = `hsl(${Math.random() * 360}, 100%, 70%)`;
+                confetti.style.animationDelay = Math.random() * 5 + "s";
+                document.body.appendChild(confetti);
+            }
+        </script>
+        <script>
+            function handleImageError() {
+                const img = document.getElementById('birthdayImage');
+                const uploader = document.getElementById('imageUploader');
+
+                // Hide broken image and show file input
+                img.style.display = 'none';
+                uploader.style.display = 'block';
+            }
+
+            function previewImage(event) {
+                const file = event.target.files[0];
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = function (e) {
+                        const img = document.getElementById('birthdayImage');
+                        img.src = e.target.result;
+                        img.style.display = 'block'; // Show uploaded image
+                        event.target.style.display = 'none'; // Hide uploader after upload
+                    }
+                    reader.readAsDataURL(file);
+                }
+            }
+        </script>
+
+
+</body>
+</html>

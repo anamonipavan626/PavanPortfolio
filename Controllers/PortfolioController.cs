@@ -5,7 +5,7 @@ namespace PavanPortfolio.Controllers
     public class PortfolioController : Controller
     {
         public IActionResult PortFolio()
-        {
+        {   
             return View();
         }
         public IActionResult Menu()
