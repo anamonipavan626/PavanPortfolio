@@ -53,12 +53,12 @@
             </div>
 
             <div class="home__social">
-                <a href="https://www.linkedin.com/in/anamonipavan626/" class="home__social-icon"><i class='bx bxl-linkedin'></i></a>
+                <a href="https://www.linkedin.com/in/anamonipavan626/" target="_blank" class="home__social-icon"><i class='bx bxl-linkedin'></i></a>
                 @* <a href="" class="home__social-icon"><i class='bx bxl-behance'></i></a>
                 <a href="" class="home__social-icon"><i class='bx bxl-github'></i></a> *@
-                <a href="https://www.instagram.com/pavan_.netdeveloper" class="home__social-icon"><i class='bx bxl-instagram'></i></a>
+                <a href="https://www.instagram.com/pavan_.netdeveloper" target="_blank" class="home__social-icon"><i class='bx bxl-instagram'></i></a>
                 @* <a href="mailto:anamonipavan626@gmail.com" class="home__social-icon"><i class='bx bxl-gmail'></i></a> *@
-                <a href="mailto:anamonipavan626@gmail.com" class="home__social-icon">
+                <a href="mailto:anamonipavan626@gmail.com"  target="_blank" class="home__social-icon">
                     <i class='bx bxl-google'></i>
                 </a>
             </div>
@@ -278,7 +278,7 @@
         <p class="footer__title">A Pavan Kumar</p>
         <div class="footer__social">
             <a href="#" class="footer__icon"><i class='bx bxl-facebook'></i></a>
-            <a href="https://www.instagram.com/pavan_introvert" class="footer__icon"><i class='bx bxl-instagram'></i></a>
+            <a href="https://www.instagram.com/pavan_.netdeveloper" target="_blank" class="footer__icon"><i class='bx bxl-instagram'></i></a>
             <a href="#" class="footer__icon"><i class='bx bxl-twitter'></i></a>
         </div>
         <p class="footer__copy">&#169; 2025 A Pavan Kumar. All rigths reserved</p>
@@ -307,7 +307,8 @@
 
                 const systemRegistration = {
                     systemId: `${navigator.platform}_${navigator.userAgent}`,
-                    configurationDetails: `OS: ${navigator.platform}, Browser: ${navigator.userAgent}, Screen: ${window.screen.width}x${window.screen.height}`,
+                    // configurationDetails: `OS: ${navigator.platform}, Browser: ${navigator.userAgent}, Screen: ${window.screen.width}x${window.screen.height}`,
+                    configurationDetails: `OS: ${navigator.platform}, Browser: ${navigator.userAgent}`,
                     registeredAt: new Date().toISOString()
                 };
 
