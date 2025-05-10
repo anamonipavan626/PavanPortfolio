@@ -295,6 +295,7 @@
 
                     Your browser does not support the audio element.
                 </audio>
+                <button onclick="enableAudio()">🔊 Enable Sound</button>
 
 
             </div>
@@ -310,7 +311,7 @@
 
         </div>
 
-        <div class="footer">Designed and Wishes by your friend PAVAN</div>
+        <div class="footer">Designed and Wishes by your friend</div>
 
         @* <audio autoplay id="bgAudio" loop controls="controls" class="audio-player">
 
@@ -377,6 +378,14 @@
                     reader.readAsDataURL(file);
                 }
             }
+
+            function enableAudio() {
+                const audio = document.getElementById('bgAudio');
+                audio.muted = false;
+                audio.play();
+            }
+
+
         </script>
 
 
