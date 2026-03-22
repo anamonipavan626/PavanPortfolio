@@ -1,4 +1,4 @@
-﻿@{
+@{
     ViewBag.Title = "PavanPortFolio";
     Layout = null; 
 }
@@ -8,14 +8,191 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <link rel="stylesheet" href="assets/css/styles.css">
+    <link rel="stylesheet" href="/assets/css/styles.css">
 
     <!-- =====BOX ICONS===== -->
     <link href='https://cdn.jsdelivr.net/npm/boxicons@2.0.5/css/boxicons.min.css' rel='stylesheet'>
-    <link rel="icon" href="assets/img/perfil-title.png" type="image/png">
+    <link rel="icon" href="/assets/img/perfil-title.png" type="image/png">
     <title>Pavan Personal Portfolio</title>
+    <style>
+        /* Realistic Galaxy Theme Overrides for Readability */
+        :root {
+            --first-color: #60a5fa;
+            --second-color: #f8fafc;
+        }
+        body, p, span, h1, h2, h3, h4, h5, h6, a, li, .about__text, .skills__text {
+            color: #f8fafc !important;
+        }
+        .section-title {
+            color: #60a5fa !important;
+            text-shadow: 0 0 10px rgba(96, 165, 250, 0.3);
+            position: relative;
+        }
+        .section-title::after {
+            background-color: #60a5fa !important;
+        }
+        .home__title-color, .skills__icon {
+            color: #60a5fa !important;
+        }
+        .l-header {
+            background-color: rgba(10, 15, 30, 0.6) !important;
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+        .nav__logo, .nav__toggle, .nav__link {
+            color: #fff !important;
+        }
+        .nav__link.active-link {
+            color: #60a5fa !important;
+        }
+        .nav__link:hover::after, .active-link::after {
+            background-color: #60a5fa !important;
+        }
+        .contact__input {
+            background-color: rgba(255, 255, 255, 0.05) !important;
+            color: #fff !important;
+            border: 1px solid rgba(255,255,255,0.1) !important;
+        }
+        .contact__input::placeholder { color: #a0a0a0 !important; }
+        .home__social-icon, .footer__icon { color: #b0c0d0 !important; }
+        .home__social-icon:hover, .footer__icon:hover { color: #60a5fa !important; }
+        .footer { background-color: rgba(10, 15, 30, 0.9) !important; border-top: 1px solid rgba(255,255,255,0.05); }
+        .about__container, .skills__container, .contact__container, .experience__container, .projects__container {
+            background: rgba(15, 20, 30, 0.4);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255,255,255,0.05);
+            padding: 2rem;
+            border-radius: 1rem;
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.5);
+        }
+        .skills__data {
+            background: rgba(255, 255, 255, 0.05) !important;
+            border: none !important;
+            box-shadow: none !important;
+        }
+        .skills__bar { background-color: #60a5fa !important; }
+        .button {
+            background-color: rgba(96, 165, 250, 0.2) !important;
+            color: #60a5fa !important;
+            border: 1px solid #60a5fa;
+            backdrop-filter: blur(5px);
+        }
+        .button:hover { background-color: rgba(96, 165, 250, 0.4) !important; }
+        
+        .experience-item, .project-item {
+            margin-bottom: 2rem;
+            border-left: 2px solid #60a5fa;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+        .experience-item::before, .project-item::before {
+            content: '';
+            position: absolute;
+            left: -6px;
+            top: 0;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: #60a5fa;
+        }
+        .experience-item p, .experience-item ul, .project-item p, .project-item ul {
+            font-size: 0.9rem;
+            color: #cbd5e1 !important;
+            margin-top: 0.5rem;
+        }
+        .experience-item ul, .project-item ul {
+            list-style-type: disc;
+            margin-left: 1.5rem;
+        }
+        .experience-item li, .project-item li {
+            margin-bottom: 0.5rem;
+        }
+        
+        .profile-frame {
+            width: 100%;
+            max-width: 320px;
+            aspect-ratio: 1;
+            border-radius: 50%;
+            padding: 8px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 2px solid rgba(96, 165, 250, 0.4);
+            box-shadow: 0 0 35px rgba(96, 165, 250, 0.5), inset 0 0 20px rgba(96, 165, 250, 0.3);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            backdrop-filter: blur(8px);
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+        }
+        .profile-frame:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 50px rgba(96, 165, 250, 0.7), inset 0 0 30px rgba(96, 165, 250, 0.5);
+        }
+        .profile-img {
+            width: 100%;
+            height: 115%;
+            object-fit: cover;
+            border-radius: 50%;
+            /* To make it look perfect inside the circle */
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 0 15px rgba(0,0,0,0.5);
+        }
+        
+        /* Align Home Image Level with "Hi," Text on Desktop */
+        @@media screen and (min-width: 768px) {
+            .home__img {
+                bottom: auto !important;
+                top: 8rem !important;
+            }
+        }
+        
+        .about-photo {
+            width: 100%;
+            max-width: 320px;
+            border-radius: 1.5rem;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.5), 0 0 20px rgba(96,165,250,0.2);
+            border: 2px solid rgba(255,255,255,0.05);
+            transition: transform 0.4s ease;
+        }
+        .about-photo:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 25px 45px rgba(0,0,0,0.6), 0 0 30px rgba(96,165,250,0.4);
+        }
+        .glow-link {
+    padding: 4px 10px;
+    border-radius: 6px;
+    font-weight: 600;
+    color: #fff;
+    background: linear-gradient(90deg, #007bff, #00d4ff);
+    text-decoration: none;
+    box-shadow: 0 0 6px #00c8ff;
+    transition: 0.3s ease-in-out;
+}
+
+.glow-link:hover {
+    box-shadow: 0 0 12px #00eaff, 0 0 20px #00eaff;
+    transform: scale(1.05);
+}
+
+/* Optional: Pulsing glow effect */
+.glow-link {
+    animation: glowPulse 2s infinite alternate;
+}
+
+@@keyframes glowPulse {
+    from {
+        box-shadow: 0 0 4px #00c8ff;
+    }
+    to {
+        box-shadow: 0 0 12px #00eaff;
+    }
+}
+    </style>
 </head>
 <body>
+    <!-- Galaxy Background Canvas -->
+    <canvas id="galaxyCanvas" style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: -10; background: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%);"></canvas>
+
     <!--===== HEADER =====-->
     <header class="l-header">
         <nav class="nav bd-grid">
@@ -27,11 +204,12 @@
                 <ul class="nav__list">
                     <li class="nav__item"><a href="#home" class="nav__link active-link">Home</a></li>
                     <li class="nav__item"><a href="#about" class="nav__link">About</a></li>
+                    <li class="nav__item"><a href="#experience" class="nav__link">Experience</a></li>
+                    <li class="nav__item"><a href="#projects" class="nav__link">Projects</a></li>
                     <li class="nav__item"><a href="#skills" class="nav__link">Skills</a></li>
-                    <li class="nav__item"><a href="#work" class="nav__link">Work</a></li>
                     <li class="nav__item"><a href="#contact" class="nav__link">Contact</a></li>
                     <li class="nav__item">
-                        <a href="assets/resume/Pavan_Dot_Net_Developer_Resume.pdf" class="nav__link" target="_blank" download>Download Resume</a>
+                        <a href="/assets/resume/Pavan_Dot_Net_Developer_Resume.pdf" class="nav__link" target="_blank" download>Download Resume</a>
                     </li>
                 </ul>
             </div>
@@ -49,7 +227,7 @@
                 <h1 class="home__title">Hi,<br>I'am <span class="home__title-color">Pavan</span><br> Web Developer</h1>
 
                 <a href="#contact" class="button">Contact</a>
-                <a href="assets/resume/Pavan_Dot_Net_Developer_Resume.pdf" class="button" target="_blank" download>Download Resume</a>
+                <a href="/assets/resume/Pavan_Dot_Net_Developer_Resume.pdf" class="button" target="_blank" download>Download Resume</a>
             </div>
 
             <div class="home__social">
@@ -63,189 +241,166 @@
                 </a>
             </div>
 
-            <div class="home__img">
-                <svg class="home__blob" viewBox="0 0 479 467" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-                    <mask id="mask0" mask-type="alpha">
-                        <path d="M9.19024 145.964C34.0253 76.5814 114.865 54.7299 184.111 29.4823C245.804 6.98884 311.86 -14.9503 370.735 14.143C431.207 44.026 467.948 107.508 477.191 174.311C485.897 237.229 454.931 294.377 416.506 344.954C373.74 401.245 326.068 462.801 255.442 466.189C179.416 469.835 111.552 422.137 65.1576 361.805C17.4835 299.81 -17.1617 219.583 9.19024 145.964Z" />
-                    </mask>
-                    <g mask="url(#mask0)">
-                        <path d="M9.19024 145.964C34.0253 76.5814 114.865 54.7299 184.111 29.4823C245.804 6.98884 311.86 -14.9503 370.735 14.143C431.207 44.026 467.948 107.508 477.191 174.311C485.897 237.229 454.931 294.377 416.506 344.954C373.74 401.245 326.068 462.801 255.442 466.189C179.416 469.835 111.552 422.137 65.1576 361.805C17.4835 299.81 -17.1617 219.583 9.19024 145.964Z" />
-                        <image class="home__blob-img" x="50" y="60" href="assets/img/perfil1.png" />
-                    </g>
-                </svg>
+            <div class="home__img" style="display: flex; justify-content: center; align-items: center;">
+                <div class="profile-frame">
+                    <img src="/assets/img/perfil1.png" alt="Pavan" class="profile-img">
+                </div>
             </div>
         </section>
 
         <!--===== ABOUT =====-->
         <section class="about section " id="about">
-            <h2 class="section-title">About</h2>
+            <h2 class="section-title">About Me</h2>
 
             <div class="about__container bd-grid">
-                <div class="about__img">
-                    <img src="assets/img/about1.jpg" alt="">
+                <div class="about__img" style="display:flex; justify-content:center; align-items:center;">
+                    <img src="/assets/img/perfil1.png" alt="Pavan Kumar" class="about-photo">
                 </div>
 
                 <div>
-                    <h2 class="about__subtitle">I'am A Pavan Kumar</h2>
-                    <p class="about__text">As a .NET Developer with 2+ years of experience, I have successfully designed, developed, and maintained robust web applications and software solutions using the .NET framework and .NET Core technologies. My expertise lies in both front-end and back-end development, ensuring efficient code implementation and seamless user experiences.</p>
+                    <h2 class="about__subtitle">I'm A Pavan Kumar</h2>
+                    <p class="about__text">Full Stack .NET Developer with 3+ years of experience designing, developing, and deploying scalable enterprise web applications. Experienced in building secure RESTful APIs, migrating monolithic systems to microservices architecture, and managing end-to-end development across front-end, back-end, and database layers. Strong expertise in ASP.NET, C#, Web API, MySQL, Redis, and Linux deployments. Proficient in Docker, CI/CD pipelines, and Agile development practices, delivering reliable and high-performance production systems.</p>
+                </div>
+            </div>
+        </section>
+
+        <!--===== EXPERIENCE =====-->
+        <section class="experience section" id="experience">
+            <h2 class="section-title">Experience</h2>
+            <div class="experience__container bd-grid">
+                <div class="experience-item">
+                    <h3 class="experience__title" style="color:var(--first-color); margin-bottom:0.2rem;">Software Engineer</h3>
+                    <span class="experience__company" style="color:#94a3b8; font-weight:600;">Intellect Informatics | Feb 2023 - Present</span>
+                    <ul>
+                        <li>Designed and developed full-stack web applications using ASP.NET, C#, and Web API.</li>
+                        <li>Built and implemented RESTful APIs to enable multi-database integration and seamless data consolidation.</li>
+                        <li>Migrated legacy monolithic applications into microservices architecture to improve scalability and maintainability.</li>
+                        <li>Containerized applications using Docker and automated CI/CD pipelines with Jenkins and GitLab.</li>
+                        <li>Developed responsive user interfaces using HTML5, CSS3, Bootstrap, and jQuery.</li>
+                        <li>Integrated secure database layers using ADO.NET, Dapper and NHibernate with MySQL.</li>
+                        <li>Constructed JWT-based authentication with role-based access control mechanisms.</li>
+                        <li>Deployed and maintained applications on Linux servers using Apache2.</li>
+                        <li>Leveraged AI-assisted development tools (Cursor, GPT) to improve development efficiency.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!--===== PROJECTS =====-->
+        <section class="projects section" id="projects">
+            <h2 class="section-title">Projects</h2>
+            <div class="projects__container bd-grid">
+                <div class="project-item">
+                    <h3 class="project__title" style="color:var(--first-color); margin-bottom:0.2rem;">Unito ERP Level 3</h3>
+                    <p>Migrated ERP system from Level 2 to Level 3 architecture. Implemented Redis caching, replaced NHibernate ORM with Dapper micro-ORM to significantly improve query performance, and continued microservices development for enhanced scalability. Improved loan processing performance by approximately 15% through backend optimizations.</p>
+                </div>
+                <div class="project-item">
+                    <h3 class="project__title" style="color:var(--first-color); margin-bottom:0.2rem;">Unito ERP Level 2</h3>
+                    <p>Played a key role in Loans Module development. Migrated ERP architecture from monolithic to microservices-based architecture to improve scalability. Designed RESTful APIs for microservices communication and implemented automated CI/CD deployments using Docker and Jenkins. Improved loan processing efficiency by approximately 25%.</p>
+                </div>
+                <div class="project-item">
+                    <h3 class="project__title" style="color:var(--first-color); margin-bottom:0.2rem;">Unito ERP Correction Tool & Capture Tool</h3>
+                    <p>Developed and maintained internal correction and data capture tools for ERP FAS and Loans modules. Implemented backend logic and reporting functionality to support data correction and maintenance operations.</p>
+                </div>
+                <div class="project-item">
+                    <h3 class="project__title" style="color:var(--first-color); margin-bottom:0.2rem;">Unito ERP Level 1</h3>
+                    <p>Designed and developed ERP banking modules including FAS screens, reporting modules, and production issue support. Contributed to development of monolithic enterprise banking application components ensuring maintainability and stability.</p>
                 </div>
             </div>
         </section>
 
         <!--===== SKILLS =====-->
         <section class="skills section" id="skills">
-            <h2 class="section-title">Skills</h2>
+            <h2 class="section-title">Technical Skills</h2>
 
             <div class="skills__container bd-grid">
                 <div>
-                    <h2 class="skills__subtitle">Profesional Skills</h2>
-                    <p class="skills__text">I have 2+ years of experience as a .NET Developer, proficient in HTML5, CSS3, JavaScript, and jQuery for front-end development. I have expertise in Git, MySQL, NHibernate, and developing secure Web APIs. Additionally, I have some basic knowledge of Docker and deployment using Nginx.</p>
-                    <!--===== C#.NET =====-->
-                    <div class="skills__data">
+                    <h2 class="skills__subtitle" style="color:var(--first-color); margin-bottom:1rem;">Core Competencies</h2>
+                    <p class="skills__text" style="font-size:0.95rem; line-height: 1.6;">
+                        <strong>Backend:</strong> C#, ASP.NET MVC, Web API, RESTful APIs, Microservices, ADO.NET, LINQ, NHibernate, Dapper<br>
+                        <strong>Databases:</strong> SQL, MySQL, Redis<br>
+                        <strong>Frontend:</strong> HTML5, CSS3, JavaScript, Bootstrap, jQuery<br>
+                        <strong>DevOps & Tools:</strong> Docker, Jenkins, GitLab, Apache2, Linux, Git, SVN, Cursor, GPT
+                    </p>
+                    
+                    <div class="skills__data" style="margin-top:2rem;">
                         <div class="skills__names">
                             <i class='bx bxl-microsoft skills__icon'></i>
-                            <span class="skills__name">C#.NET</span>
+                            <span class="skills__name" style="color:#f8fafc;">C#.NET & ASP.NET</span>
                         </div>
-                        <div class="skills__bar skills__NET"></div>
-                        <div>
-                            <span class="skills__percentage">85%</span>
+                        <div class="skills__bar" style="width: 85%;"></div>
+                        <div><span class="skills__percentage" style="color:#60a5fa; font-weight:bold;">85%</span></div>
+                    </div>
+
+                    <div class="skills__data">
+                        <div class="skills__names">
+                            <i class='bx bx-git-repo-forked skills__icon'></i>
+                            <span class="skills__name" style="color:#f8fafc;">Microservices & Web API</span>
                         </div>
+                        <div class="skills__bar" style="width: 85%;"></div>
+                        <div><span class="skills__percentage" style="color:#60a5fa; font-weight:bold;">85%</span></div>
+                    </div>
+
+                    <div class="skills__data">
+                        <div class="skills__names">
+                            <i class='bx bx-server skills__icon'></i>
+                            <span class="skills__name" style="color:#f8fafc;">RESTful APIs</span>
+                        </div>
+                        <div class="skills__bar" style="width: 80%;"></div>
+                        <div><span class="skills__percentage" style="color:#60a5fa; font-weight:bold;">80%</span></div>
+                    </div>
+
+                    <div class="skills__data">
+                        <div class="skills__names">
+                            <i class='bx bxs-data skills__icon'></i>
+                            <span class="skills__name" style="color:#f8fafc;">MySQL / SQL Server</span>
+                        </div>
+                        <div class="skills__bar" style="width: 80%;"></div>
+                        <div><span class="skills__percentage" style="color:#60a5fa; font-weight:bold;">80%</span></div>
+                    </div>
+
+                    <div class="skills__data">
+                        <div class="skills__names">
+                            <i class='bx bx-data skills__icon'></i>
+                            <span class="skills__name" style="color:#f8fafc;">ADO.NET & Dapper</span>
+                        </div>
+                        <div class="skills__bar" style="width: 75%;"></div>
+                        <div><span class="skills__percentage" style="color:#60a5fa; font-weight:bold;">75%</span></div>
+                    </div>
+
+                    <div class="skills__data">
+                        <div class="skills__names">
+                            <i class='bx bxl-docker skills__icon'></i>
+                            <span class="skills__name" style="color:#f8fafc;">Docker, Jenkins & CI/CD</span>
+                        </div>
+                        <div class="skills__bar" style="width: 75%;"></div>
+                        <div><span class="skills__percentage" style="color:#60a5fa; font-weight:bold;">75%</span></div>
                     </div>
 
                     <div class="skills__data">
                         <div class="skills__names">
                             <i class='bx bxl-git skills__icon'></i>
-                            <span class="skills__name">Git</span>
+                            <span class="skills__name" style="color:#f8fafc;">Git & SVN</span>
                         </div>
-                        <div class="skills__bar skills__git"></div>
-                        <div>
-                            <span class="skills__percentage">75%</span>
-                        </div>
-                    </div>
-                    <!--===== MVC .NET Core =====-->
-                    <div class="skills__data">
-                        <div class="skills__names">
-                            <i class='bx bx-desktop skills__icon'></i>
-                            <span class="skills__name"> MVC .NET Core</span>
-                        </div>
-                        <div class="skills__bar skills__Core"></div>
-                        <div>
-                            <span class="skills__percentage">80%</span>
-                        </div>
-                    </div>
-                    <div class="skills__data">
-                        <div class="skills__names">
-                            <i class='bx bxs-data skills__icon'></i>
-                            <span class="skills__name">MySQL</span>
-                        </div>
-                        <div class="skills__bar skills__mysql"></div>
-                        <div>
-                            <span class="skills__percentage">75%</span>
-                        </div>
+                        <div class="skills__bar" style="width: 80%;"></div>
+                        <div><span class="skills__percentage" style="color:#60a5fa; font-weight:bold;">80%</span></div>
                     </div>
 
-                    <div class="skills__data">
-                        <div class="skills__names">
-                            <i class='bx bx-world skills__icon'></i>
-                            <span class="skills__name">Web API</span>
-                        </div>
-                        <div class="skills__bar skills__webapi"></div>
-                        <div>
-                            <span class="skills__percentage">85%</span>
-                        </div>
-                    </div>
-
-                    
-                    
                     <div class="skills__data">
                         <div class="skills__names">
                             <i class='bx bxl-html5 skills__icon'></i>
-                            <span class="skills__name">HTML5</span>
+                            <span class="skills__name" style="color:#f8fafc;">Frontend (HTML / CSS / JS)</span>
                         </div>
-                        <div class="skills__bar skills__html">
-                        </div>
-                        <div>
-                            <span class="skills__percentage">95%</span>
-                        </div>
+                        <div class="skills__bar" style="width: 85%;"></div>
+                        <div><span class="skills__percentage" style="color:#60a5fa; font-weight:bold;">85%</span></div>
                     </div>
-                    <div class="skills__data">
-                        <div class="skills__names">
-                            <i class='bx bxl-css3 skills__icon'></i>
-                            <span class="skills__name">CSS3</span>
-                        </div>
-                        <div class="skills__bar skills__css">
-                        </div>
-                        <div>
-                            <span class="skills__percentage">65%</span>
-                        </div>
-                    </div>
-                    <div class="skills__data">
-                        <div class="skills__names">
-                            <i class='bx bxl-javascript skills__icon'></i>
-                            <span class="skills__name">JAVASCRIPT and Ajax</span>
-                        </div>
-                        <div class="skills__bar skills__js">
-                        </div>
-                        <div>
-                            <span class="skills__percentage">65%</span>
-                        </div>
-                    </div>  
-                    <!--===== TortoiseSVN =====-->
-                    <div class="skills__data">
-                        <div class="skills__names">
-                            <i class='bx bx-git-branch skills__icon'></i>
-                            <span class="skills__name"> TortoiseSVN</span>
-                        </div>
-                        <div class="skills__bar skills__TortoiseSVN"></div>
-                        <div>
-                            <span class="skills__percentage">60%</span>
-                        </div>
-                    </div>
-                    <!--===== SQL Server =====-->
-                    <div class="skills__data">
-                        <div class="skills__names">
-                            <i class='bx bxs-data skills__icon'></i>
-                            <span class="skills__name"> SQL Server</span>
-                        </div>
-                        <div class="skills__bar skills__SQL"></div>
-                        <div>
-                            <span class="skills__percentage">75%</span>
-                        </div>
-                    </div>
-                      
                 </div>
 
                 <div>
-                    <img src="assets/img/PavanTechnologiesKnows.png" alt="" class="skills__img">
+                    <img src="/assets/img/PavanTechnologiesKnows.png" alt="" class="skills__img" style="border-radius:1rem; box-shadow: 0 4px 15px rgba(0,0,0,0.5);">
                     <br /><br />
-                    <img src="assets/img/work3.jpg" alt="" class="skills__img">
+                    <img src="/assets/img/work3.jpg" alt="" class="skills__img" style="border-radius:1rem; box-shadow: 0 4px 15px rgba(0,0,0,0.5);">
                 </div>
-            </div>
-        </section>
-
-        <!--===== WORK =====-->
-        <section class="work section" id="work">
-            <h2 class="section-title">Work</h2>
-
-            <div class="work__container bd-grid">
-                <a href="" class="work__img">
-                    <img src="assets/img/work1.jpg" alt="">
-                </a>
-                <a href="" class="work__img">
-                    <img src="assets/img/work2.jpg" alt="">
-                </a>
-                <a href="" class="work__img">
-                    <img src="assets/img/work3.jpg" alt="">
-                </a>
-                <a href="" class="work__img">
-                    <img src="assets/img/work4.jpg" alt="">
-                </a>
-                <a href="" class="work__img">
-                    <img src="assets/img/work5.jpg" alt="">
-                </a>
-                <a href="" class="work__img">
-                    <img src="assets/img/work6.jpg" alt="">
-                </a>
             </div>
         </section>
 
@@ -278,10 +433,16 @@
         <p class="footer__title">A Pavan Kumar</p>
         <div class="footer__social">
             <a href="#" class="footer__icon"><i class='bx bxl-facebook'></i></a>
-            <a href="https://www.instagram.com/pavan_.netdeveloper" target="_blank" class="footer__icon"><i class='bx bxl-instagram'></i></a>
+            <a href="https://www.instagram.com/kalilinux_user.netdeveloper" target="_blank" class="footer__icon"><i class='bx bxl-instagram'></i></a>
             <a href="#" class="footer__icon"><i class='bx bxl-twitter'></i></a>
         </div>
-        <p class="footer__copy">&#169; 2025 A Pavan Kumar. All rigths reserved</p>
+        @* <p class="footer__copy">&#169; 2025 A Pavan Kumar. All rigths reserved.  Version  v2</p>    *@
+        <p class="footer__copy">
+            &#169; 2025 A Pavan Kumar. All rights reserved.
+            Current Version <strong>v2</strong> | Old Version
+            <a href="@Url.Action("PortFolioVersion1", "Portfolio")" target="_blank"
+               class="footer__version-link glow-link">v1</a>
+        </p>
     </footer>
 
 
@@ -289,7 +450,7 @@
     <script src="https://unpkg.com/scrollreveal"></script>
 
     <!--===== MAIN JS =====-->
-    <script src="assets/js/main.js"></script>
+    <script src="/assets/js/main.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
     <script>
@@ -334,6 +495,138 @@
             });
 
         })
+    </script>
+
+    <!-- Realistic Galaxy Animation Script -->
+    <script>
+        const canvas = document.getElementById('galaxyCanvas');
+        const ctx = canvas.getContext('2d');
+        let width, height;
+        let particles = [];
+
+        function initGalaxy() {
+            width = canvas.width = window.innerWidth;
+            height = canvas.height = window.innerHeight;
+            particles = [];
+            
+            const arms = 2; // Realistic 2 spiral arms
+            const maxRadius = Math.max(width, height) * 0.9;
+            
+            // Core and disk particles
+            for (let i = 0; i < 3000; i++) {
+                // Focus heavily on the center using exponential distribution approximation
+                let d = (Math.random() + Math.random() + Math.random()) / 3;
+                d = Math.pow(d, 2.5);
+                const radius = d * maxRadius;
+                
+                let angle = d * Math.PI * 6; // Spiral winding
+                const armOffset = (i % arms) * Math.PI; 
+                angle += armOffset;
+                
+                // Add natural scattering which increases further from center
+                let scatter = (Math.random() - 0.5) * Math.PI * (0.8 + d * 2);
+                
+                // 30% are disk population, not tied to arms
+                if (Math.random() < 0.3) {
+                    scatter = Math.random() * Math.PI * 2; 
+                }
+                angle += scatter;
+                
+                // Assign realistic star colors (bluish-white arms, yellow-white core)
+                let color, size;
+                if (d < 0.1) { // Bulge/Core (Yellow/White)
+                    color = `rgba(255, ${220 + Math.random()*35}, ${180 + Math.random()*75}, `;
+                    size = Math.random() * 1.5;
+                } else if (Math.random() < 0.15) { // H II regions / dust lanes
+                    color = `rgba(255, 150, 200, `; // pinkish
+                    size = Math.random() * 1.5;
+                } else { // Disk / Arms (Blue/White)
+                    color = `rgba(${180 + Math.random()*75}, ${220 + Math.random()*35}, 255, `;
+                    size = Math.random() * 1.2;
+                }
+                
+                // Opacity falls off at edges
+                const opacity = Math.min(0.9, Math.max(0.1, 1 - d));
+
+                particles.push({
+                    angle: angle,
+                    radius: radius,
+                    colorBase: color,
+                    baseOpacity: opacity,
+                    speed: 0.0003 + (1 - d) * 0.0002, // inner rotates slightly faster
+                    size: size,
+                    isStatic: false
+                });
+            }
+
+            // Scatter background stars
+            for (let i = 0; i < 400; i++) {
+                particles.push({
+                    x: Math.random() * width,
+                    y: Math.random() * height,
+                    size: Math.random() * 1.5,
+                    color: `rgba(255, 255, 255, `,
+                    baseOpacity: Math.random(),
+                    isStatic: true,
+                    phase: Math.random() * Math.PI * 2
+                });
+            }
+        }
+
+        function drawGalaxy() {
+            // Deep cosmic background
+            let bg = ctx.createRadialGradient(width/2, height/2, 0, width/2, height/2, Math.max(width, height));
+            bg.addColorStop(0, '#050a14');
+            bg.addColorStop(0.5, '#020408');
+            bg.addColorStop(1, '#000000');
+            ctx.fillStyle = bg;
+            ctx.fillRect(0, 0, width, height);
+
+            ctx.globalCompositeOperation = 'screen'; // Great for blending lights
+            
+            // Glow of the galactic core
+            let coreGrp = ctx.createRadialGradient(width/2, height/2, 0, width/2, height/2, Math.min(width, height) * 0.35);
+            coreGrp.addColorStop(0, 'rgba(255, 240, 210, 0.15)'); // Warm glow
+            coreGrp.addColorStop(0.4, 'rgba(80, 130, 255, 0.05)'); // Cool halo
+            coreGrp.addColorStop(1, 'rgba(0, 0, 0, 0)');
+            ctx.fillStyle = coreGrp;
+            ctx.fillRect(0, 0, width, height);
+
+            const centerX = width / 2;
+            const centerY = height / 2;
+            const time = Date.now() * 0.001;
+
+            for (let i = 0; i < particles.length; i++) {
+                let p = particles[i];
+                
+                if (p.isStatic) {
+                    ctx.beginPath();
+                    ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+                    // Twinkle effect
+                    const currentOpacity = Math.max(0.1, p.baseOpacity + Math.sin(time * 2 + p.phase) * 0.3);
+                    ctx.fillStyle = p.color + currentOpacity + ')';
+                    ctx.fill();
+                } else {
+                    p.angle -= p.speed;
+                    
+                    const x = centerX + Math.cos(p.angle) * p.radius;
+                    // Squish by 0.35 to give realistic 3D perspective tilt
+                    const y = centerY + Math.sin(p.angle) * p.radius * 0.35; 
+                    
+                    ctx.beginPath();
+                    ctx.arc(x, y, p.size, 0, Math.PI * 2);
+                    ctx.fillStyle = p.colorBase + p.baseOpacity + ')';
+                    ctx.fill();
+                }
+            }
+            
+            ctx.globalCompositeOperation = 'source-over';
+            requestAnimationFrame(drawGalaxy);
+        }
+
+        window.addEventListener('resize', initGalaxy);
+        initGalaxy();
+        drawGalaxy();
     </script>
 
 </body>

@@ -133,7 +133,11 @@ namespace PavanPortfolio.Controllers
         public static async void SendRequestTomail(string name,string Email,string Body,string attachmentFilePath)
         {
             string subject = "Reg : "+name+" Trying  to Contact You";
-            string body = "Dear "+"\n"+Body+"\n\n\n"+"Regards," + "\n\n\n"+name + ",\n"+Email;
+            string body = "Dear Pavan,<br/>"
+            + Body + "<br/><br/>"
+            + "Regards,<br/><br/>"
+            + name + ",<br/>"
+            + Email;
             string to = "anamonipavan626@gmail.com";// "babubattina @gmail.com";// "pratyusha9171 @gmail.com";
            // string attachmentFilePath =  Path.Combine(System.IO.Path.GetFullPath(System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"..\..\..\")) + "Models\\", "SystemRegistrations.xlsx");
             try

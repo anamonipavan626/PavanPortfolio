@@ -12,4 +12,10 @@
     <PackageReference Include="Quartz" Version="3.14.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Content Update="Views\Portfolio\PortFolioVersion1.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
 </Project>
